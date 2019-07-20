@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class SearchActivity extends AppCompatActivity
     private Spinner fuelSpinner;
     private Spinner modelSpinner;
     private Button searchBtn;
+    private ProgressBar progress;
 
     private String country;
     private String city;
@@ -146,11 +148,21 @@ public class SearchActivity extends AppCompatActivity
                 fuelType = fuelSpinner.getSelectedItem().toString();
                 model = modelSpinner.getSelectedItem().toString();
 
+                progress.setVisibility(View.VISIBLE);
+                searchBtn.setVisibility(View.GONE);
+
                 String show = new String(country + ", " + city + ", " + fromDay + ", " + fromMonth + ", " +fromYear + ", " + toDay + ", " +toMonth + ", " +toYear + ", " + numOfPeople + ", " +transmissionType + ", " + fuelType + ", " + model);
                 Toast.makeText(getApplicationContext(), show, Toast.LENGTH_LONG).show();
 
+                try{
+                    wait(5000);
+                }catch (InterruptedException e){
+                    Log.e("Wait", e.toString());
+                }
             }
         });
+
+        progress = (ProgressBar) findViewById(R.id.searchProgressBar);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }

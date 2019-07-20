@@ -24,16 +24,16 @@ public class LoginDataSource {
             boolean connectionClosed=false;
 
             StrictMode.setThreadPolicy(policy);
-//            try {
-//                connectBDMySQL();
-//                connectionClosed = connectionMySQL.isClosed();
-//            }catch (ClassNotFoundException e){
-//                return false;
-//            }catch (SQLException e){
-//                return false;
-//            }catch (RuntimeException e){
-//                return false;
-//            }
+            try {
+                connectBDMySQL();
+                connectionClosed = connectionMySQL.isClosed();
+            }catch (ClassNotFoundException e){
+                return false;
+            }catch (SQLException e){
+                return false;
+            }catch (RuntimeException e){
+                return false;
+            }
 
 
             if(!connectionClosed){
@@ -48,8 +48,8 @@ public class LoginDataSource {
     }
 
     public void connectBDMySQL() throws ClassNotFoundException, SQLException {
-        String user="root";
-        String password="";
+        String user="panikos";
+        String password="rentndrive";
         String ip="192.168.10.108";
         String port="3306";
         String db="rentndrive";
