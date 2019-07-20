@@ -1,19 +1,13 @@
 package com.example.rentndrive.data;
 
 import android.os.StrictMode;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import com.example.rentndrive.data.model.LoggedInUser;
 import com.example.rentndrive.ui.login.LoginActivity;
-
-import java.io.IOException;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -21,52 +15,59 @@ import java.io.IOException;
 public class LoginDataSource {
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-    Connection conexionMySQL;
+    Connection connectionMySQL;
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Boolean login(String username, String password) {
 
-        try {
             // TODO: handle loggedInUser authentication
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(),
-                            "Jane Doe");
 
+            boolean connectionClosed=false;
 
             StrictMode.setThreadPolicy(policy);
-            connectBDMySQL();
+//            try {
+//                connectBDMySQL();
+//                connectionClosed = connectionMySQL.isClosed();
+//            }catch (ClassNotFoundException e){
+//                return false;
+//            }catch (SQLException e){
+//                return false;
+//            }catch (RuntimeException e){
+//                return false;
+//            }
 
-            return new Result.Success<>(fakeUser);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
-        }
+
+            if(!connectionClosed){
+
+                return true;
+            }
+            return false;
     }
 
     public void logout() {
         // TODO: revoke authentication
     }
 
-    public void connectBDMySQL()
-    {
+    public void connectBDMySQL() throws ClassNotFoundException, SQLException {
         String user="root";
         String password="";
-        String ip="192.168.10.88";
+        String ip="192.168.10.108";
         String port="3306";
         String db="rentndrive";
 
-        if (conexionMySQL == null)
+        if (connectionMySQL == null)
         {
             String urlConexionMySQL = "";
+
             if (db!= "")
                 urlConexionMySQL = "jdbc:mysql://" + ip + ":" + port+ "/" + db;
             else
                 urlConexionMySQL = "jdbc:mysql://" + ip + ":" + port;
-            if (user!= "" & password!= "" & ip != "" & port!= "")
+            if (user!= "" & ip != "" & port!= "")//& password!= ""
             {
                 try
                 {
                     Class.forName("com.mysql.jdbc.Driver");
-                    conexionMySQL = DriverManager.getConnection(urlConexionMySQL,
+                    connectionMySQL = DriverManager.getConnection(urlConexionMySQL,
                             user, password);
                 }
                 catch (ClassNotFoundException e)
@@ -74,12 +75,14 @@ public class LoginDataSource {
                     Toast.makeText(LoginActivity.context,
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_SHORT).show();
+                    throw e;
                 }
                 catch (SQLException e)
                 {
                     Toast.makeText(LoginActivity.context,
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_SHORT).show();
+                    throw e;
                 }
             }
         }

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".SearchActivity"
+    tools:showIn="@layout/app_bar_search"
+    android:fadeScrollbars="false"
+    android:scrollbarAlwaysDrawHorizontalTrack="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/search_menu_icon"/>
+
+            <TextView
+                android:paddingStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Use the following filters to find the most suited vehicle for your needs"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Country"/>
+
+        <Spinner
+            android:id="@+id/countrySpinner"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/country_prompt"
+            android:entries="@array/country_arrays"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City"/>
+
+        <Spinner
+            android:id="@+id/citySpinner"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/city_prompt"
+            android:entries="@array/city_arrays"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date From"/>
+
+        <DatePicker
+            android:id="@+id/dateFrom"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date To"/>
+
+        <DatePicker
+            android:id="@+id/dateTo"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:minDate="@id/dateFrom"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of People"/>
+
+        <EditText
+            android:id="@+id/peopleEdTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionDone"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transmission"/>
+
+        <Spinner
+            android:id="@+id/transmittionSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/transmission_arrays"
+            android:paddingTop="10dp"
+            android:prompt="@string/transmission_prompt" />
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fuel Type"/>
+
+        <Spinner
+            android:id="@+id/fuelSpinner"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/fuel_prompt"
+            android:entries="@array/fuel_arrays"/>
+
+        <TextView
+            android:paddingTop="10dp"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Model"/>
+
+        <Spinner
+            android:id="@+id/modelSpinner"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/model_prompt"
+            android:entries="@array/model_arrays"/>
+
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:background="@drawable/round_btn_normal"/>
+
+        <ProgressBar
+            android:id="@+id/searchProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</ScrollView>

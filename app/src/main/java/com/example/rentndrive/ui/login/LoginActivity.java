@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rentndrive.R;
+import com.example.rentndrive.SearchActivity;
+import com.example.rentndrive.data.model.LoggedInUser;
 import com.example.rentndrive.ui.login.LoginViewModel;
 import com.example.rentndrive.ui.login.LoginViewModelFactory;
 
@@ -29,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     public static Context context;
+    public static LoggedInUser logedUser;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,12 +78,15 @@ public class LoginActivity extends AppCompatActivity {
                     showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
+                    logedUser = new LoggedInUser(usernameEditText.getText().toString() ,loginResult.getSuccess().getDisplayName());
                     updateUiWithUser(loginResult.getSuccess());
+
                 }
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
                 finish();
+
             }
         });
 
@@ -127,14 +135,11 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
 //        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        try {
-            wait(100000000);
-        }catch (InterruptedException e){
-            Log.e("Log", e.toString());
-        }
+       Intent intent = new Intent(this, SearchActivity.class);
+       startActivity(intent);
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), errorString.toString() + "Please make sure you are connected to the internet", Toast.LENGTH_SHORT).show();
     }
 }
