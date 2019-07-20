@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">RentnDrive</string>
-    <!-- Strings related to login -->
+    <!-- Strings related to com.example.rentndrive.login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -26,6 +26,7 @@
 
     <string name="country_prompt">Choose the Country</string>
     <string-array name="country_arrays">
+        <item>-Any-</item>
         <item>Cyprus</item>
     </string-array>
 
@@ -60,4 +61,7 @@
     <string-array name="model_arrays">
         <item>-Any-</item>
     </string-array>
+    <string name="title_activity_results">ResultsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

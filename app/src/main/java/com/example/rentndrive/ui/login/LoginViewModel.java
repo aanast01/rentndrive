@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Patterns;
 
+import com.example.rentndrive.data.LoginDataSource;
 import com.example.rentndrive.data.LoginRepository;
 import com.example.rentndrive.data.Result;
 import com.example.rentndrive.data.model.LoggedInUser;
@@ -33,7 +34,7 @@ public class LoginViewModel extends ViewModel {
        boolean result = loginRepository.login(username, password);
 
         if (result == true) {
-            LoggedInUser data = new LoggedInUser(username, username);
+            LoggedInUser data = new LoggedInUser(username, LoginDataSource.fullName);
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
@@ -64,6 +65,6 @@ public class LoginViewModel extends ViewModel {
 
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+        return password != null;
     }
 }

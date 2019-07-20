@@ -2,9 +2,11 @@ package com.example.rentndrive.data;
 
 import com.example.rentndrive.data.model.LoggedInUser;
 
+import java.sql.SQLException;
+
 /**
  * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
+ * maintains an in-memory cache of com.example.rentndrive.login status and user credentials information.
  */
 public class LoginRepository {
 
@@ -34,7 +36,11 @@ public class LoginRepository {
 
     public void logout() {
         user = null;
-        dataSource.logout();
+        try {
+            dataSource.logout();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setLoggedInUser(LoggedInUser user) {
@@ -44,10 +50,10 @@ public class LoginRepository {
     }
 
     public boolean login(String username, String password) {
-        // handle login
+        // handle com.example.rentndrive.login
         Boolean result = dataSource.login(username, password);
         if (result == true) {
-            setLoggedInUser(new LoggedInUser(username, "name"));
+            setLoggedInUser(new LoggedInUser(username, LoginDataSource.fullName));
             return true;
         }
         return false;

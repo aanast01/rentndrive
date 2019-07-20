@@ -3,7 +3,7 @@ package com.example.rentndrive.ui.login;
 import android.support.annotation.Nullable;
 
 /**
- * Data validation state of the login form.
+ * Data validation state of the com.example.rentndrive.login form.
  */
 class LoginFormState {
     @Nullable

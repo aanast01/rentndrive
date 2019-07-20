@@ -24,9 +24,12 @@ import android.widget.Toast;
 
 import com.example.rentndrive.R;
 import com.example.rentndrive.SearchActivity;
+import com.example.rentndrive.data.LoginDataSource;
 import com.example.rentndrive.data.model.LoggedInUser;
 import com.example.rentndrive.ui.login.LoginViewModel;
 import com.example.rentndrive.ui.login.LoginViewModelFactory;
+
+import java.sql.SQLException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,6 +53,11 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        //TODO: delete the next 3 lines below
+        loginButton.setEnabled(true);
+        usernameEditText.setText("spiros@hotmail.com");
+        passwordEditText.setText("spiropaido");
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -78,14 +86,19 @@ public class LoginActivity extends AppCompatActivity {
                     showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
-                    logedUser = new LoggedInUser(usernameEditText.getText().toString() ,loginResult.getSuccess().getDisplayName());
+                    logedUser = new LoggedInUser(LoginDataSource.fullName,loginResult.getSuccess().getDisplayName());
                     updateUiWithUser(loginResult.getSuccess());
 
                 }
                 setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
-                finish();
+                //Complete and destroy com.example.rentndrive.login activity once successful
+//                try {
+//                    LoginDataSource.connectionMySQL.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//                finish();
 
             }
         });
@@ -133,13 +146,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
 //        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
        Intent intent = new Intent(this, SearchActivity.class);
        startActivity(intent);
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString.toString() + "Please make sure you are connected to the internet", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login Failed. Please check your email, password and internet connection", Toast.LENGTH_SHORT).show();
     }
 }

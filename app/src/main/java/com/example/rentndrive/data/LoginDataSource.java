@@ -1,31 +1,42 @@
 package com.example.rentndrive.data;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.StrictMode;
 import android.widget.Toast;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.example.rentndrive.ui.login.LoginActivity;
 
 /**
- * Class that handles authentication w/ login credentials and retrieves user information.
+ * Class that handles authentication w/ com.example.rentndrive.login credentials and retrieves user information.
  */
 public class LoginDataSource {
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-    Connection connectionMySQL;
+    public static Connection connectionMySQL;
+    public static String fullName="";
+    public static Blob userBlob=null;
+    public static Bitmap userPic=null;
+
 
     public Boolean login(String username, String password) {
 
             // TODO: handle loggedInUser authentication
 
             boolean connectionClosed=false;
+            boolean success=false;
 
             StrictMode.setThreadPolicy(policy);
             try {
-                connectBDMySQL();
+
+                success = connectBDMySQL(username, password);
                 connectionClosed = connectionMySQL.isClosed();
             }catch (ClassNotFoundException e){
                 return false;
@@ -36,18 +47,21 @@ public class LoginDataSource {
             }
 
 
-            if(!connectionClosed){
-
+            if(success){
                 return true;
             }
             return false;
     }
 
-    public void logout() {
-        // TODO: revoke authentication
+    public static void logout() throws SQLException {
+        fullName="";
+        userBlob=null;
+        userPic=null;
+        connectionMySQL.close();
+        connectionMySQL=null;
     }
 
-    public void connectBDMySQL() throws ClassNotFoundException, SQLException {
+    public Boolean connectBDMySQL(String email, String userPass) throws ClassNotFoundException, SQLException {
         String user="panikos";
         String password="rentndrive";
         String ip="192.168.10.108";
@@ -57,6 +71,7 @@ public class LoginDataSource {
         if (connectionMySQL == null)
         {
             String urlConexionMySQL = "";
+            Boolean flag=false;
 
             if (db!= "")
                 urlConexionMySQL = "jdbc:mysql://" + ip + ":" + port+ "/" + db;
@@ -69,6 +84,25 @@ public class LoginDataSource {
                     Class.forName("com.mysql.jdbc.Driver");
                     connectionMySQL = DriverManager.getConnection(urlConexionMySQL,
                             user, password);
+
+                    if (connectionMySQL ==null){
+                        Toast.makeText(LoginActivity.context, "Connection Error", Toast.LENGTH_LONG);
+                        return false;
+                    }
+                    String name="";
+                    Statement stmt = connectionMySQL.createStatement();
+                    ResultSet rs = stmt.executeQuery("select * from clients where email = '" + email + "' and password = '" + userPass + "';");
+                    while(rs.next()) {
+                        fullName = rs.getString(1);
+                        fullName += " " + rs.getString(2);
+                        userBlob  = rs.getBlob(4);
+                        int blobLength = (int) userBlob.length();
+                        byte[] blobAsBytes = userBlob.getBytes(1, blobLength);
+                        userPic = BitmapFactory.decodeByteArray(blobAsBytes,0,blobAsBytes.length);
+                        flag = true;
+                    }
+                    return flag;
+
                 }
                 catch (ClassNotFoundException e)
                 {
@@ -84,7 +118,9 @@ public class LoginDataSource {
                             Toast.LENGTH_SHORT).show();
                     throw e;
                 }
+
             }
         }
+        return false;
     }
 }

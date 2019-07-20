@@ -1,6 +1,8 @@
 package com.example.rentndrive;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,15 +26,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rentndrive.data.LoginDataSource;
+import com.example.rentndrive.data.model.LoggedInUser;
 import com.example.rentndrive.ui.login.LoginActivity;
 
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.example.rentndrive.data.LoginDataSource.connectionMySQL;
 
 public class SearchActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,6 +73,191 @@ public class SearchActivity extends AppCompatActivity
     private String fuelType;
     private String model;
 
+    //region SETTERS AND GETTERS
+    public static int getResultsCount() {
+        return resultsCount;
+    }
+
+    public void setResultsCount(int resultsCount) {
+        this.resultsCount = resultsCount;
+    }
+
+    public static int[] getCarID() {
+        return carID;
+    }
+
+    public void setCarID(int[] carID) {
+        this.carID = carID;
+    }
+
+    public static String[] getCountries() {
+        return countries;
+    }
+
+    public void setCountries(String[] countries) {
+        this.countries = countries;
+    }
+
+    public static String[] getCities() {
+        return cities;
+    }
+
+    public void setCities(String[] cities) {
+        this.cities = cities;
+    }
+
+    public static String[] getManufacture() {
+        return manufacture;
+    }
+
+    public void setManufacture(String[] manufacture) {
+        this.manufacture = manufacture;
+    }
+
+    public static String[] getColor() {
+        return color;
+    }
+
+    public void setColor(String[] color) {
+        this.color = color;
+    }
+
+    public static String[] getDamages() {
+        return damages;
+    }
+
+    public void setDamages(String[] damages) {
+        this.damages = damages;
+    }
+
+    public static int[] getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int[] capacity) {
+        this.capacity = capacity;
+    }
+
+    public static Bitmap[] getCarPic() {
+        return carPic;
+    }
+
+    public void setCarPic(Bitmap[] carPic) {
+        this.carPic = carPic;
+    }
+
+    public static String[] getTransmissionTypes() {
+        return transmissionTypes;
+    }
+
+    public void setTransmissionTypes(String[] transmissionTypes) {
+        this.transmissionTypes = transmissionTypes;
+    }
+
+    public static String[] getFuelTypes() {
+        return fuelTypes;
+    }
+
+    public void setFuelTypes(String[] fuelTypes) {
+        this.fuelTypes = fuelTypes;
+    }
+
+    public static String[] getModels() {
+        return models;
+    }
+
+    public void setModels(String[] models) {
+        this.models = models;
+    }
+
+    public static String[] getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String[] licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public static int[] getOwnerPhone() {
+        return ownerPhone;
+    }
+
+    public void setOwnerPhone(int[] ownerPhone) {
+        this.ownerPhone = ownerPhone;
+    }
+
+    public static String[] getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String[] ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public static Bitmap[] getOwnerPic() {
+        return ownerPic;
+    }
+
+    public void setOwnerPic(Bitmap[] ownerPic) {
+        this.ownerPic = ownerPic;
+    }
+
+    public String[] getModelsList() {
+        return modelsList;
+    }
+
+    public void setModelsList(String[] modelsList) {
+        this.modelsList = modelsList;
+    }
+    //endregion
+
+    private static int[] carID;
+    private static String[] countries;
+    private static String[] cities;
+    private static String[] manufacture;
+    private static String[] color;
+    private static String[] damages;
+    private static int[] capacity;
+    private Blob carBlob;
+    private static Bitmap[] carPic;
+    private static String[] transmissionTypes;
+    private static String[] fuelTypes;
+    private static String[] models;
+    private static String[] licensePlate;
+    private static int[] ownerPhone;
+
+    public static int[] getClientPhone() {
+        return clientPhone;
+    }
+
+    private static int[] clientPhone;
+    private static String[] ownerName;
+    private Blob ownerBlob;
+    private static Bitmap[] ownerPic;
+
+    public static String getFromDate() {
+        return fromDate;
+    }
+
+    private static String fromDate;
+
+    public static String getToDate() {
+        return toDate;
+    }
+
+    private static String toDate;
+    public static int[] getCostPerDay() {
+        return costPerDay;
+    }
+
+    private static int[] costPerDay;
+
+    private static int resultsCount;
+
+    private String[] modelsList;
+
+    private Boolean flag=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +274,11 @@ public class SearchActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView name = (TextView) headerView.findViewById(R.id.nameTxt);
         TextView email = (TextView) headerView.findViewById(R.id.emailTxt);
+        ImageView image = (ImageView) headerView.findViewById(R.id.imageView);
 
-        name.setText(LoginActivity.logedUser.getDisplayName());
-        email.setText(LoginActivity.logedUser.getUserId());
+        image.setImageBitmap(LoginDataSource.userPic);
+        name.setText(LoginActivity.logedUser.getUserId());
+        email.setText(LoginActivity.logedUser.getDisplayName());
 
         countrySpinner = (Spinner) findViewById(R.id.countrySpinner);
         citySpinner = (Spinner) findViewById(R.id.citySpinner);
@@ -123,7 +321,28 @@ public class SearchActivity extends AppCompatActivity
         fuelSpinner = (Spinner) findViewById(R.id.fuelSpinner);
         modelSpinner = (Spinner) findViewById(R.id.modelSpinner);
 
-        String[] modelsList = new String[]{"a", "b", "c"};
+//        String[] modelsList=new String[]{"-Any-","a","a","a","a","a", "a"};
+        String query = "select model from cars";
+        Statement stmt = null;
+        try {
+            stmt = connectionMySQL.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int i=1;
+            while(rs.next()) {
+               i++;
+            }
+            modelsList=new String[i];
+            modelsList[0]="-Any-";
+            stmt = connectionMySQL.createStatement();
+            ResultSet rs2 = stmt.executeQuery(query);
+            int j=1;
+            while(rs2.next()) {
+                modelsList[j]=rs2.getString(1);
+                j++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, modelsList);
 
@@ -133,6 +352,7 @@ public class SearchActivity extends AppCompatActivity
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 country = countrySpinner.getSelectedItem().toString();
                 city = citySpinner.getSelectedItem().toString();
                 fromDay = dateFromPicker.getDayOfMonth() +"";
@@ -142,6 +362,10 @@ public class SearchActivity extends AppCompatActivity
                 toDay = dateToPicker.getDayOfMonth() +"";
                 toMonth = dateToPicker.getMonth() +"";
                 toYear = dateToPicker.getYear() +"";
+                fromDate = fromYear+"-"+fromMonth+"-"+fromDay;
+                toDate = toYear+"-"+toMonth+"-"+toDay;
+                String dateFrom = fromYear+"-"+fromMonth+"-"+fromDay;
+                String dateTo = toYear+"-"+toMonth+"-"+toDay;
 
                 numOfPeople = noOfPeople.getText().toString();
                 transmissionType = transmissionSpinner.getSelectedItem().toString();
@@ -151,14 +375,106 @@ public class SearchActivity extends AppCompatActivity
                 progress.setVisibility(View.VISIBLE);
                 searchBtn.setVisibility(View.GONE);
 
-                String show = new String(country + ", " + city + ", " + fromDay + ", " + fromMonth + ", " +fromYear + ", " + toDay + ", " +toMonth + ", " +toYear + ", " + numOfPeople + ", " +transmissionType + ", " + fuelType + ", " + model);
-                Toast.makeText(getApplicationContext(), show, Toast.LENGTH_LONG).show();
+                String query="SELECT cars.CarID,Manufacturer,Model,Capacity,cars.Picture,City,Country, owners.Firstname, owners.Lastname,OwnerPhoneNumber,owners.Picture, Transmission, Fuel, Color, Damages, LicensePlate, CostPerDay, cars_has_clients.ClientPhoneNumber FROM cars, cars_has_clients,owners WHERE (EndRentDate< ')"+
+                        dateFrom+"' OR StartRentDate>'"+dateTo+"')  AND cars.CarID=cars_has_clients.CarID AND owners.PhoneNumber=cars.OwnerPhoneNumber ";
 
-                try{
-                    wait(5000);
-                }catch (InterruptedException e){
-                    Log.e("Wait", e.toString());
+                if(!city.equals("-Any-")){
+                    query+= "AND cars.City = '"+city+"' ";
                 }
+                if(!country.equals("-Any-")){
+                    query+= "AND cars.Country = '"+country+"' ";
+                }
+                if (!numOfPeople.isEmpty()){
+                    query+= "cars.Capacity>="+numOfPeople;
+                }
+                if(!transmissionType.equals("-Any-")){
+                    query+= "and transmission = '"+transmissionType+"' ";
+                }
+                if(!fuelType.equals("-Any-")){
+                    query+= "and fuel = '"+fuelType+"' ";
+                }
+                if(!model.equals("-Any-")){
+                    query+= "and Model = '"+model+"' ";
+                }
+                query+=";";
+
+//                String show = new String(country[0] + ", " + city[0] + ", " + fromDay + ", " + fromMonth + ", " +fromYear + ", " + toDay + ", " +toMonth + ", " +toYear + ", " + numOfPeople[0] + ", " +transmissionType[0] + ", " + fuelType[0] + ", " + model[0]);
+//                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_LONG).show();
+
+
+
+                Statement stmt = null;
+
+//                String query = "select * from cars where Country = '"+country+"' and City = '"+city+
+//                        "' and Capacity = '"+numOfPeople+"' and Transmission = '"+transmissionType+"' and Fuel = '"+fuelType+"' and Model = '"+model+"';"
+                try {
+                    stmt = connectionMySQL.createStatement();
+                    ResultSet r = stmt.executeQuery(query);
+                    int count=0;
+                    while(r.next()) {
+                        count++;
+                    }
+                    setResultsCount(count);
+                    carID = new int[count];
+                    manufacture = new String[count];
+                    models = new String[count];
+                    transmissionTypes = new String[count];
+                    fuelTypes = new String[count];
+                    color = new String[count];
+                    damages = new String[count];
+                    countries = new String[count];
+                    cities = new String[count];
+                    capacity = new int[count];
+                    carPic = new Bitmap[count];
+                    licensePlate = new String[count];
+                    ownerPhone = new int[count];
+                    ownerName = new String[count];
+                    ownerPic = new Bitmap[count];
+                    costPerDay = new int[count];
+                    clientPhone = new int[count];
+
+                    Toast.makeText(getApplicationContext(), count+"", Toast.LENGTH_LONG).show();
+                    stmt = connectionMySQL.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    int i=0;
+                    while(rs.next()) {
+                      carID[i] =rs.getInt(1);
+                      manufacture[i] = rs.getString(2);
+                      models[i] = rs.getString(3);
+                      transmissionTypes[i] = rs.getString(12);
+                      fuelTypes[i] = rs.getString(13);
+                      color[i] = rs.getString(14);
+                      damages[i] = rs.getString(15);
+                      countries[i] = rs.getString(7);
+                      cities[i] = rs.getString(6);
+                      capacity[i] = rs.getInt(4);
+                      carBlob = rs.getBlob(5);
+                      int blobLength = (int) carBlob.length();
+                      byte[] blobAsBytes = carBlob.getBytes(1, blobLength);
+                      carPic[i] = BitmapFactory.decodeByteArray(blobAsBytes,0,blobAsBytes.length);
+                      licensePlate[i] = rs.getString(16);
+                      ownerPhone[i] = rs.getInt(10);
+                      ownerName[i] = rs.getString(8);
+                      ownerName[i]+= " "+ rs.getString(9);
+                      ownerBlob = rs.getBlob(11);
+                      int blob2Length = (int) ownerBlob.length();
+                      byte[] blob2AsBytes = ownerBlob.getBytes(1, blob2Length);
+                      ownerPic[i] = BitmapFactory.decodeByteArray(blob2AsBytes,0,blob2AsBytes.length);
+                      costPerDay[i] = rs.getInt(17);
+                      clientPhone[i] = rs.getInt(18);
+                      i++;
+                      flag = true;
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                if(resultsCount==0){
+                    Toast.makeText(getApplicationContext(), "No results Found", Toast.LENGTH_LONG).show();
+                }else {
+                    startActivity(new Intent(getApplicationContext(), ResultsActivity.class));
+                }
+                progress.setVisibility(View.GONE);
+                searchBtn.setVisibility(View.VISIBLE);
             }
         });
 
@@ -193,6 +509,14 @@ public class SearchActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            try {
+                LoginDataSource.logout();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            this.finish();
             return true;
         }
 
@@ -225,6 +549,15 @@ public class SearchActivity extends AppCompatActivity
             Toast toast =  Toast.makeText(getApplicationContext(), "This app was developed during the Hack{Cyprus} by the Rn'D team", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER_HORIZONTAL,0,0);
             toast.show();
+        } else if (id == R.id.nav_logout){
+            try {
+                LoginDataSource.logout();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            this.finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

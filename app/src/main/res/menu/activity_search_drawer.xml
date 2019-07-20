@@ -23,4 +23,13 @@
         </menu>
     </item>
 
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout_menu_icon"
+                android:title="Log out" />
+        </menu>
+    </item>
+
 </menu>

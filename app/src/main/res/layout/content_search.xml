@@ -54,7 +54,7 @@
             android:entries="@array/country_arrays"/>
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:entries="@array/city_arrays"/>
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,12 +78,12 @@
         <DatePicker
             android:id="@+id/dateFrom"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="120dp"
             android:datePickerMode="spinner"
             android:calendarViewShown="false"/>
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,13 +92,13 @@
         <DatePicker
             android:id="@+id/dateTo"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="120dp"
             android:datePickerMode="spinner"
             android:calendarViewShown="false"
             android:minDate="@id/dateFrom"/>
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
             android:imeOptions="actionDone"/>
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
             android:prompt="@string/transmission_prompt" />
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
             android:entries="@array/fuel_arrays"/>
 
         <TextView
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,7 +150,6 @@
 
         <Spinner
             android:id="@+id/modelSpinner"
-            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:prompt="@string/model_prompt"
@@ -160,13 +159,20 @@
             android:id="@+id/searchBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/round_btn_normal"
+            android:layout_marginTop="10dp"
             android:text="Search"
-            android:background="@drawable/round_btn_normal"/>
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/searchProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:visibility="gone"/>
 
     </LinearLayout>

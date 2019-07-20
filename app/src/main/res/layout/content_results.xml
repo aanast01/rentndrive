@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ResultsActivity"
+    tools:showIn="@layout/activity_results">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C8CACE">
+
+        <LinearLayout
+            android:id="@+id/resultsLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:id="@+id/result1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#BBCFE6"
+                android:weightSum="3">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage1"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carTans1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#95A3B4"
+                android:layout_marginTop="5dp"
+                android:id="@+id/result2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:visibility="gone">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage2"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carTans2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#BBCFE6"
+                android:layout_marginTop="5dp"
+                android:id="@+id/result3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:visibility="gone">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage3"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carTans3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#91A4BE"
+                android:layout_marginTop="5dp"
+                android:id="@+id/result4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:visibility="gone">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage4"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carTans4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#BBCFE6"
+                android:layout_marginTop="5dp"
+                android:id="@+id/result5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:visibility="gone">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage5"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carTans5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#95A3B4"
+                android:layout_marginTop="5dp"
+                android:id="@+id/result6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:visibility="gone">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage6"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carTans6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#BBCFE6"
+                android:layout_marginTop="5dp"
+                android:id="@+id/result7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:visibility="gone">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage7"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carTans7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#95A3B4"
+                android:layout_marginTop="5dp"
+                android:id="@+id/result8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:visibility="gone">
+
+               <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/carImage8"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carID8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carManufacture8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carModel8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carFuel8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:textAlignment="viewStart"
+                            android:id="@+id/carTans8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
