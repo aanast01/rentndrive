@@ -12,7 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".DetailsActivity"></activity>
+        <activity
+            android:name=".CongratsActivity"
+            android:label="@string/title_activity_congrats"
+            android:parentActivityName=".ResultsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.rentndrive.SearchActivity" />
+        </activity>
+        <activity android:name=".DetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.rentndrive.ResultsActivity" />
+        </activity>
         <activity
             android:name=".ResultsActivity"
             android:label="@string/title_activity_results"

@@ -27,6 +27,8 @@ public class ResultsActivity extends AppCompatActivity {
 
     TextView carTrans1,carTrans2,carTrans3,carTrans4,carTrans5,carTrans6,carTrans7,carTrans8;
 
+    TextView carCity1,carCity2,carCity3,carCity4,carCity5,carCity6,carCity7,carCity8;
+
     public static int getChoosenResult() {
         return choosenResult;
     }
@@ -104,6 +106,15 @@ public class ResultsActivity extends AppCompatActivity {
         carTrans7 = (TextView) findViewById(R.id.carTans7);
         carTrans8 = (TextView) findViewById(R.id.carTans8);
 
+        carCity1 = (TextView) findViewById(R.id.carCity1);
+        carCity2 = (TextView) findViewById(R.id.carCity2);
+        carCity3 = (TextView) findViewById(R.id.carCity3);
+        carCity4 = (TextView) findViewById(R.id.carCity4);
+        carCity5 = (TextView) findViewById(R.id.carCity5);
+        carCity6 = (TextView) findViewById(R.id.carCity6);
+        carCity7 = (TextView) findViewById(R.id.carCity7);
+        carCity8 = (TextView) findViewById(R.id.carCity8);
+
 
         carImage1.setImageBitmap(SearchActivity.getCarPic()[0]);
         carID1.setText("€"+SearchActivity.getCostPerDay()[0]);
@@ -111,6 +122,7 @@ public class ResultsActivity extends AppCompatActivity {
         carModel1.setText(SearchActivity.getModels()[0]);
         carFuel1.setText(SearchActivity.getFuelTypes()[0]);
         carTrans1.setText(SearchActivity.getTransmissionTypes()[0]);
+        carCity1.setText(SearchActivity.getCities()[0]);
 
         int resultsCount = SearchActivity.getResultsCount();
         switch (resultsCount){
@@ -247,7 +259,7 @@ public class ResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
-                choosenResult=8;
+                choosenResult=7;
             }
         });
     }
@@ -259,6 +271,7 @@ public class ResultsActivity extends AppCompatActivity {
         carModel2.setText(SearchActivity.getModels()[1]);
         carFuel2.setText(SearchActivity.getFuelTypes()[1]);
         carTrans2.setText(SearchActivity.getTransmissionTypes()[1]);
+        carCity2.setText(SearchActivity.getCities()[1]);
     }
 
     void showResult3(){
@@ -268,6 +281,7 @@ public class ResultsActivity extends AppCompatActivity {
         carModel3.setText(SearchActivity.getModels()[2]);
         carFuel3.setText(SearchActivity.getFuelTypes()[2]);
         carTrans3.setText(SearchActivity.getTransmissionTypes()[2]);
+        carCity3.setText(SearchActivity.getCities()[2]);
     }
 
     void showResult4(){
@@ -277,6 +291,7 @@ public class ResultsActivity extends AppCompatActivity {
         carModel4.setText(SearchActivity.getModels()[3]);
         carFuel4.setText(SearchActivity.getFuelTypes()[3]);
         carTrans4.setText(SearchActivity.getTransmissionTypes()[3]);
+        carCity4.setText(SearchActivity.getCities()[3]);
     }
 
     void showResult5(){
@@ -286,6 +301,7 @@ public class ResultsActivity extends AppCompatActivity {
         carModel5.setText(SearchActivity.getModels()[4]);
         carFuel5.setText(SearchActivity.getFuelTypes()[4]);
         carTrans5.setText(SearchActivity.getTransmissionTypes()[4]);
+        carCity5.setText(SearchActivity.getCities()[4]);
     }
 
     void showResult6(){
@@ -295,6 +311,7 @@ public class ResultsActivity extends AppCompatActivity {
         carModel6.setText(SearchActivity.getModels()[5]);
         carFuel6.setText(SearchActivity.getFuelTypes()[5]);
         carTrans6.setText(SearchActivity.getTransmissionTypes()[5]);
+        carCity6.setText(SearchActivity.getCities()[5]);
     }
 
     void showResult7(){
@@ -304,6 +321,7 @@ public class ResultsActivity extends AppCompatActivity {
         carModel7.setText(SearchActivity.getModels()[6]);
         carFuel7.setText(SearchActivity.getFuelTypes()[6]);
         carTrans7.setText(SearchActivity.getTransmissionTypes()[6]);
+        carCity7.setText(SearchActivity.getCities()[6]);
     }
 
     void showResult8(){
@@ -313,5 +331,6 @@ public class ResultsActivity extends AppCompatActivity {
         carModel8.setText(SearchActivity.getModels()[7]);
         carFuel8.setText(SearchActivity.getFuelTypes()[7]);
         carTrans8.setText(SearchActivity.getTransmissionTypes()[7]);
+        carCity8.setText(SearchActivity.getCities()[7]);
     }
 }

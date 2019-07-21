@@ -1,13 +1,20 @@
 package com.example.rentndrive;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.rentndrive.data.LoginDataSource;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView plate;
     private TextView dateFrom;
     private TextView dateTo;
-    private TextView cost;
+//    private TextView cost;
     private ImageView carPic;
     private Button confirmBtn;
     private ProgressBar progressBar;
@@ -41,6 +48,9 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         manufacture = (TextView) findViewById(R.id.manufatureTxt);
         model = (TextView) findViewById(R.id.modelTxt);
@@ -57,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
         carPic= (ImageView) findViewById(R.id.carPicImage);
         dateFrom= (TextView) findViewById(R.id.dateFromTxt);
         dateTo= (TextView) findViewById(R.id.dateToTxt);
-        cost= (TextView) findViewById(R.id.costTxt);
+//        cost= (TextView) findViewById(R.id.costTxt);
         confirmBtn = (Button) findViewById(R.id.confirmBtn);
         progressBar = (ProgressBar) findViewById(R.id.confirmProg);
 
@@ -78,6 +88,10 @@ public class DetailsActivity extends AppCompatActivity {
         dateFrom.setText(SearchActivity.getFromDate());
         dateTo.setText(SearchActivity.getToDate());
 
+        String dateFromString = dateFrom.getText().toString();
+        String dateToString = dateTo.getText().toString();
+
+
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,17 +99,28 @@ public class DetailsActivity extends AppCompatActivity {
                 confirmBtn.setVisibility(View.GONE);
                 Statement stmt = null;
 
-                String query = "INSERT INTO cars_has_clients (CarID, ClientPhoneNumber, StartRentDate, EndRentDate) VALUES ("+SearchActivity.getCarID()[selectedCar]+","+SearchActivity.getClientPhone()[selectedCar]+",'"+dateFrom+"','"+dateTo+"')";
-
+                String query = "INSERT INTO cars_has_clients (CarID, ClientPhoneNumber, StartRentDate, EndRentDate) VALUES ("+SearchActivity.getCarID()[selectedCar]+", "+ LoginDataSource.getClientPhone()+", '"+dateFrom.getText().toString()+"', '"+dateTo.getText().toString()+"');";
                 try {
                     stmt = connectionMySQL.createStatement();
-                    ResultSet r = stmt.executeQuery(query);
+                    stmt.executeUpdate(query);
+//                    ResultSet r = stmt.executeQuery(query);
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "ERROR BOOK NOT DONE", Toast.LENGTH_LONG).show();
                 }
-                progressBar.setVisibility(View.GONE);
-                confirmBtn.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(), "CONGRATS!! Your reservation have been successfuly stored!", Toast.LENGTH_LONG).show();
+//                View actView = (View) findViewById(R.id.detailsAct);
+//                Snackbar.make(actView, query, BaseTransientBottomBar.LENGTH_INDEFINITE).show();
+//                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please wait while we are communicating with our server...", Toast.LENGTH_LONG).show();
+                new Handler().postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+                       progressBar.setVisibility(View.GONE);
+                       confirmBtn.setVisibility(View.VISIBLE);
+//                Toast.makeText(getApplicationContext(), "CONGRATS!! Your reservation have been successfuly stored!", Toast.LENGTH_LONG).show();
+                       startActivity(new Intent(getApplicationContext(), CongratsActivity.class));
+                   }
+               }, 2000);
 
             }
         });

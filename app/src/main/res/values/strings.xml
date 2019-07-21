@@ -3,13 +3,12 @@
     <!-- Strings related to com.example.rentndrive.login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_search">SearchActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -23,6 +22,11 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="title_activity_congrats">Congratulations</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_results">Results</string>
+
 
     <string name="country_prompt">Choose the Country</string>
     <string-array name="country_arrays">
@@ -61,7 +65,6 @@
     <string-array name="model_arrays">
         <item>-Any-</item>
     </string-array>
-    <string name="title_activity_results">ResultsActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
 </resources>

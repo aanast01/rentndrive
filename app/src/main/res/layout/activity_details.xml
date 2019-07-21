@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/detailsAct"
     tools:context=".DetailsActivity"
-
-    android:isScrollContainer="true">
+    android:background="#C8CACE"
+    android:isScrollContainer="true"
+    android:fadeScrollbars="false"
+    android:scrollbarAlwaysDrawHorizontalTrack="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,6 +19,7 @@
         <ImageView
             android:id="@+id/carPicImage"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="130dp"
             android:src="@mipmap/ic_launcher"
             android:layout_gravity="center_horizontal"/>
@@ -274,34 +278,37 @@
                 android:text="dd/mm/yyyy"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:paddingTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Cost: "/>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+            <!--<TextView-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Total Cost: "/>-->
 
-            <TextView
-                android:id="@+id/costTxt"
-                android:paddingTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="euro"/>
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/costTxt"-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="euro"/>-->
+        <!--</LinearLayout>-->
 
         <Button
             android:id="@+id/confirmBtn"
-            android:layout_marginTop="30dp"
             android:layout_gravity="center"
             android:background="@drawable/round_btn_normal"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:text="Confirm Booking"/>
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="Book Now"/>
 
         <ProgressBar
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/confirmProg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -55,9 +55,9 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
         //TODO: delete the next 3 lines below
-        loginButton.setEnabled(true);
-        usernameEditText.setText("spiros@hotmail.com");
-        passwordEditText.setText("spiropaido");
+//        loginButton.setEnabled(true);
+//        usernameEditText.setText("spiros@hotmail.com");
+//        passwordEditText.setText("spiropaido");
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override

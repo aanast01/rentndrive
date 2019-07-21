@@ -25,6 +25,12 @@ public class LoginDataSource {
     public static Blob userBlob=null;
     public static Bitmap userPic=null;
 
+    public static int getClientPhone() {
+        return clientPhone;
+    }
+
+    public static int clientPhone;
+
 
     public Boolean login(String username, String password) {
 
@@ -64,7 +70,7 @@ public class LoginDataSource {
     public Boolean connectBDMySQL(String email, String userPass) throws ClassNotFoundException, SQLException {
         String user="panikos";
         String password="rentndrive";
-        String ip="192.168.10.108";
+        String ip="MinasPC";
         String port="3306";
         String db="rentndrive";
 
@@ -96,6 +102,7 @@ public class LoginDataSource {
                         fullName = rs.getString(1);
                         fullName += " " + rs.getString(2);
                         userBlob  = rs.getBlob(4);
+                        clientPhone = rs.getInt(3);
                         int blobLength = (int) userBlob.length();
                         byte[] blobAsBytes = userBlob.getBytes(1, blobLength);
                         userPic = BitmapFactory.decodeByteArray(blobAsBytes,0,blobAsBytes.length);

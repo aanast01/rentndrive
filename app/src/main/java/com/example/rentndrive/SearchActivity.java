@@ -209,6 +209,30 @@ public class SearchActivity extends AppCompatActivity
     public void setModelsList(String[] modelsList) {
         this.modelsList = modelsList;
     }
+
+    public static Boolean[] getWhatsapp() {
+        return whatsapp;
+    }
+
+    public static int[] getClientPhone() {
+        return clientPhone;
+    }
+
+    public static int[] getCostPerDay() {
+        return costPerDay;
+    }
+
+    public static String getToDate() {
+        return toDate;
+    }
+
+    public static String getFromDate() {
+        return fromDate;
+    }
+
+    public static String[] getOwnerEmail() {
+        return ownerEmail;
+    }
     //endregion
 
     private static int[] carID;
@@ -225,32 +249,15 @@ public class SearchActivity extends AppCompatActivity
     private static String[] models;
     private static String[] licensePlate;
     private static int[] ownerPhone;
-
-    public static int[] getClientPhone() {
-        return clientPhone;
-    }
-
+    private static Boolean[] whatsapp;
     private static int[] clientPhone;
     private static String[] ownerName;
     private Blob ownerBlob;
     private static Bitmap[] ownerPic;
-
-    public static String getFromDate() {
-        return fromDate;
-    }
-
     private static String fromDate;
-
-    public static String getToDate() {
-        return toDate;
-    }
-
     private static String toDate;
-    public static int[] getCostPerDay() {
-        return costPerDay;
-    }
-
     private static int[] costPerDay;
+    private static String[] ownerEmail;
 
     private static int resultsCount;
 
@@ -285,8 +292,8 @@ public class SearchActivity extends AppCompatActivity
 
         dateFromPicker = (DatePicker) findViewById(R.id.dateFrom);
         dateToPicker = (DatePicker) findViewById(R.id.dateTo);
-        dateFromPicker.setMinDate(new Date().getTime());
-        dateToPicker.setMinDate(new Date().getTime());
+//        dateFromPicker.setMinDate(new Date().getTime());
+//        dateToPicker.setMinDate(new Date().getTime());
 
         noOfPeople = (EditText) findViewById(R.id.peopleEdTxt);
 
@@ -329,7 +336,7 @@ public class SearchActivity extends AppCompatActivity
             ResultSet rs = stmt.executeQuery(query);
             int i=1;
             while(rs.next()) {
-               i++;
+                i++;
             }
             modelsList=new String[i];
             modelsList[0]="-Any-";
@@ -356,11 +363,23 @@ public class SearchActivity extends AppCompatActivity
                 country = countrySpinner.getSelectedItem().toString();
                 city = citySpinner.getSelectedItem().toString();
                 fromDay = dateFromPicker.getDayOfMonth() +"";
-                fromMonth = dateFromPicker.getMonth() +"";
+                if(fromDay.length()<2){
+                    fromDay = "0"+fromDay;
+                }
+                fromMonth = (dateFromPicker.getMonth()+1) +"";
+                if(fromMonth.length()<2){
+                    fromMonth = "0"+fromMonth;
+                }
                 fromYear = dateFromPicker.getYear() +"";
 
                 toDay = dateToPicker.getDayOfMonth() +"";
-                toMonth = dateToPicker.getMonth() +"";
+                if(toDay.length()<2){
+                    toDay = "0"+toDay;
+                }
+                toMonth = (dateToPicker.getMonth()+1) +"";
+                if(toMonth.length()<2){
+                    toMonth = "0"+toMonth;
+                }
                 toYear = dateToPicker.getYear() +"";
                 fromDate = fromYear+"-"+fromMonth+"-"+fromDay;
                 toDate = toYear+"-"+toMonth+"-"+toDay;
@@ -375,7 +394,7 @@ public class SearchActivity extends AppCompatActivity
                 progress.setVisibility(View.VISIBLE);
                 searchBtn.setVisibility(View.GONE);
 
-                String query="SELECT cars.CarID,Manufacturer,Model,Capacity,cars.Picture,City,Country, owners.Firstname, owners.Lastname,OwnerPhoneNumber,owners.Picture, Transmission, Fuel, Color, Damages, LicensePlate, CostPerDay, cars_has_clients.ClientPhoneNumber FROM cars, cars_has_clients,owners WHERE (EndRentDate< ')"+
+                String query="SELECT cars.CarID,Manufacturer,Model,Capacity,cars.Picture,City,Country, owners.Firstname, owners.Lastname,OwnerPhoneNumber,owners.Picture, Transmission, Fuel, Color, Damages, LicensePlate, CostPerDay, owners.Whatsapp, owners.Email FROM cars, cars_has_clients,owners WHERE (EndRentDate< ')"+
                         dateFrom+"' OR StartRentDate>'"+dateTo+"')  AND cars.CarID=cars_has_clients.CarID AND owners.PhoneNumber=cars.OwnerPhoneNumber ";
 
                 if(!city.equals("-Any-")){
@@ -410,9 +429,13 @@ public class SearchActivity extends AppCompatActivity
                 try {
                     stmt = connectionMySQL.createStatement();
                     ResultSet r = stmt.executeQuery(query);
-                    int count=0;
+                    int count=-1;
                     while(r.next()) {
                         count++;
+                    }
+                    if(count==0){
+                        Toast.makeText(getApplicationContext(), "No results Found", Toast.LENGTH_LONG).show();
+                        return;
                     }
                     setResultsCount(count);
                     carID = new int[count];
@@ -432,43 +455,49 @@ public class SearchActivity extends AppCompatActivity
                     ownerPic = new Bitmap[count];
                     costPerDay = new int[count];
                     clientPhone = new int[count];
+                    whatsapp = new Boolean[count];
+                    ownerEmail = new String[count];
 
-                    Toast.makeText(getApplicationContext(), count+"", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), count+"", Toast.LENGTH_LONG).show();
                     stmt = connectionMySQL.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
-                    int i=0;
+                    int i=-1;
                     while(rs.next()) {
-                      carID[i] =rs.getInt(1);
-                      manufacture[i] = rs.getString(2);
-                      models[i] = rs.getString(3);
-                      transmissionTypes[i] = rs.getString(12);
-                      fuelTypes[i] = rs.getString(13);
-                      color[i] = rs.getString(14);
-                      damages[i] = rs.getString(15);
-                      countries[i] = rs.getString(7);
-                      cities[i] = rs.getString(6);
-                      capacity[i] = rs.getInt(4);
-                      carBlob = rs.getBlob(5);
-                      int blobLength = (int) carBlob.length();
-                      byte[] blobAsBytes = carBlob.getBytes(1, blobLength);
-                      carPic[i] = BitmapFactory.decodeByteArray(blobAsBytes,0,blobAsBytes.length);
-                      licensePlate[i] = rs.getString(16);
-                      ownerPhone[i] = rs.getInt(10);
-                      ownerName[i] = rs.getString(8);
-                      ownerName[i]+= " "+ rs.getString(9);
-                      ownerBlob = rs.getBlob(11);
-                      int blob2Length = (int) ownerBlob.length();
-                      byte[] blob2AsBytes = ownerBlob.getBytes(1, blob2Length);
-                      ownerPic[i] = BitmapFactory.decodeByteArray(blob2AsBytes,0,blob2AsBytes.length);
-                      costPerDay[i] = rs.getInt(17);
-                      clientPhone[i] = rs.getInt(18);
-                      i++;
-                      flag = true;
+                        if(i!=-1){
+                            carID[i] = rs.getInt(1);
+                            manufacture[i] = rs.getString(2);
+                            models[i] = rs.getString(3);
+                            transmissionTypes[i] = rs.getString(12);
+                            fuelTypes[i] = rs.getString(13);
+                            color[i] = rs.getString(14);
+                            damages[i] = rs.getString(15);
+                            countries[i] = rs.getString(7);
+                            cities[i] = rs.getString(6);
+                            capacity[i] = rs.getInt(4);
+                            carBlob = rs.getBlob(5);
+                            int blobLength = (int) carBlob.length();
+                            byte[] blobAsBytes = carBlob.getBytes(1, blobLength);
+                            carPic[i] = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
+                            licensePlate[i] = rs.getString(16);
+                            ownerPhone[i] = rs.getInt(10);
+                            ownerName[i] = rs.getString(8);
+                            ownerName[i] += " " + rs.getString(9);
+                            ownerBlob = rs.getBlob(11);
+                            int blob2Length = (int) ownerBlob.length();
+                            byte[] blob2AsBytes = ownerBlob.getBytes(1, blob2Length);
+                            ownerPic[i] = BitmapFactory.decodeByteArray(blob2AsBytes, 0, blob2AsBytes.length);
+                            costPerDay[i] = rs.getInt(17);
+//                            clientPhone[i] = rs.getInt(18);
+                            whatsapp[i] = rs.getInt(18) > 0;
+                            ownerEmail[i] = rs.getString(19);
+                            flag = true;
+                        }
+                        i++;
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                if(resultsCount==0){
+                if(resultsCount==-1){
                     Toast.makeText(getApplicationContext(), "No results Found", Toast.LENGTH_LONG).show();
                 }else {
                     startActivity(new Intent(getApplicationContext(), ResultsActivity.class));

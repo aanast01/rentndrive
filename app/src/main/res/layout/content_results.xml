@@ -96,6 +96,13 @@
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"
                             android:textAlignment="viewStart"/>
+
+                        <TextView
+                            android:id="@+id/carCity1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -181,6 +188,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carCity2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -266,6 +280,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carCity3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -351,6 +372,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carCity4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -436,6 +464,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carCity5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -521,6 +556,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carCity6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -606,6 +648,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carCity7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -691,6 +740,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="satdsgfdfsgsdf"/>
+
+                        <TextView
+                            android:id="@+id/carCity8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="satdsgfdfsgsdf"
+                            android:textAlignment="viewStart"/>
                     </LinearLayout>
 
                 </LinearLayout>
